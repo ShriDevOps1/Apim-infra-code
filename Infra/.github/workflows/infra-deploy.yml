@@ -1,0 +1,45 @@
+name: Infra - Deploy Function App
+
+on:
+  workflow_dispatch:        # manual trigger button
+  push:
+    branches:
+      - 'feature'
+    paths:
+      - "Infra/**"
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    environment: dev
+
+    defaults:
+      run:
+        working-directory: Infra   # IMPORTANT: your folder name is 'Infra'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.8.5
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/infra-setup'
+        run: terraform apply -auto-approve tfplan
