@@ -1,0 +1,6 @@
+subscription_id       = "xxxxx-xxxx-xxxx"
+location              = "eastus"
+resource_group_name   = "rg-func-demo"
+storage_account_name  = "stfuncdemo1234"
+service_plan_name     = "plan-func-demo"
+function_app_name     = "func-demo-app"
