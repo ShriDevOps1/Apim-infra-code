@@ -1,6 +1,6 @@
 subscription_id       = "xxxxx-xxxx-xxxx"
 location              = "eastus"
 resource_group_name   = "rg-func-demo"
-storage_account_name  = "apim-sa-123"
+storage_account_name  = "apimsa"
 service_plan_name     = "plan-func-demo"
 function_app_name     = "func-demo-app"
