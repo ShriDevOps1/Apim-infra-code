@@ -11,6 +11,11 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     environment: dev
+    env:
+      ARM_CLIENT_ID:        ${{ fromJson(secrets.AZURE_CREDENTIALS).CLIENTID }}
+      ARM_CLIENT_SECRET:    ${{ fromJson(secrets.AZURE_CREDENTIALS).CLIENTSECRET }}
+      ARM_TENANT_ID:        ${{ fromJson(secrets.AZURE_CREDENTIALS).TENANTID }}
+      ARM_SUBSCRIPTION_ID:  ${{ fromJson(secrets.AZURE_CREDENTIALS).SUBSCRIPTIONID }}
 
     defaults:
       run:
