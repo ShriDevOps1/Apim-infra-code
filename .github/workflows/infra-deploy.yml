@@ -44,4 +44,4 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
-        if: github.ref == 'refs/heads/infra-setup'
+        
