@@ -47,11 +47,11 @@ jobs:
         continue-on-error: true
         run: terraform apply -auto-approve tfplan
 
-        - name: Rollback (Destroy)
+      - name: Rollback (Destroy)
         if: failure() && steps.apply.outcome == 'failure'
         run: |
           echo "Terraform Apply failed. Rolling back..."
-        terraform destroy -auto-approve
+          terraform destroy -auto-approve
           
 
         
