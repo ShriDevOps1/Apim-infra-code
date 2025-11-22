@@ -43,11 +43,15 @@ jobs:
         run: terraform plan -out=tfplan
 
       - name: Terraform Apply
+        id: apply
+        continue-on-error: true
         run: terraform apply -auto-approve tfplan
 
-      - name: Rollback (Destroy)
+        - name: Rollback (Destroy)
         if: failure() && steps.apply.outcome == 'failure'
-        run: terraform destroy -auto-approve
-        continue-on-error: true
+        run: |
+          echo "Terraform Apply failed. Rolling back..."
+        terraform destroy -auto-approve
+          
 
         
